@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Level 2 — Heatmap with Daily Mini Line Charts</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="page-header">
+    <h1>Hong Kong Daily Temperature in Monthly Cells (last 10 years)</h1>
+    <nav class="page-nav">
+      <a href="index.html">Level 1</a>
+      <a class="is-active" href="level2.html">Level 2</a>
+    </nav>
+  </header>
+
+  <div class="controls">
+    <!-- Level 2 draws both series at once, so the legend explains the two lines
+         as well as the cell background colors. -->
+    <div id="legend" class="legend"></div>
+  </div>
+
+  <main id="chart" class="chart"></main>
+
+  <div id="tooltip" class="tooltip" role="tooltip" aria-hidden="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/tooltip.js"></script>
+  <script src="js/legend.js"></script>
+  <script src="js/heatmap.js"></script>
+  <script src="js/mini-line-chart.js"></script>
+  <script src="js/main-level2.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+/* Shared styling for both levels. Chart geometry lives in js/config.js —
+   only presentation (type, color chrome, tooltip) belongs here. */
+
+:root {
+  --text: #1b1b1f;
+  --muted: #6b7280;
+  --axis: #4169e1;          /* the sample screenshot uses blue axis labels */
+  --surface: #ffffff;
+  --border: #d9dce3;
+  --line-max: #c0392b;      /* level 2: max temperature line */
+  --line-min: #2b6cb0;      /* level 2: min temperature line */
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 24px;
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.page-nav a {
+  margin-right: 12px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.page-nav a.is-active {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* --- Controls row ------------------------------------------------------ */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+
+.metric-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+.metric-toggle legend {
+  padding: 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.metric-toggle label { cursor: pointer; }
+
+/* --- Chart ------------------------------------------------------------- */
+
+.chart svg { display: block; }
+
+/* Axis: dark domain line and ticks, blue tick labels — matches level1.png. */
+.axis .domain,
+.axis line {
+  stroke: #333333;
+}
+.axis text {
+  fill: var(--axis);
+  font-size: 11px;
+}
+
+.cell {
+  stroke: #ffffff;
+  stroke-width: 1px;
+}
+.cell:hover {
+  stroke: #333333;
+  stroke-width: 1.5px;
+}
+
+/* Level 2 mini line charts drawn inside each cell. */
+.mini-line { fill: none; stroke-width: 1px; }
+.mini-line--max { stroke: var(--line-max); }
+.mini-line--min { stroke: var(--line-min); }
+
+/* --- Legend ------------------------------------------------------------ */
+
+.legend text {
+  fill: var(--text);
+  font-size: 11px;
+}
+
+/* --- Tooltip ----------------------------------------------------------- */
+
+.tooltip {
+  position: absolute;
+  pointer-events: none;      /* never let the tooltip steal the hover */
+  opacity: 0;
+  transition: opacity 120ms ease;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.tooltip.is-visible { opacity: 1; }
