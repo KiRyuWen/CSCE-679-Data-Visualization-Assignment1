@@ -70,12 +70,60 @@ const Legend = (function () {
 
 
   /**
-   * Level 2 extra: a small key explaining the two line colors
-   * (red = max, blue = min). Two short line samples + labels.
+   * Level 2: a vertical colour ramp, coolest swatch at the top.
+   *
+   * Only the two endpoints are labelled, as in level2.png. The ramp shows all
+   * eleven Spectral classes even though the cells only ever use the warm six,
+   * so the reader can see where Hong Kong sits on a 0-40C range.
+   *
+   * @param {string} containerSelector  e.g. "#legend"
+   * @param {string[]} colors           ordered top (coolest) to bottom
+   * @param {number[]} domain           [coolestValue, hottestValue]
    */
-  function renderLineKey(containerSelector) {
-    // TODO
+  function renderVertical(containerSelector, colors, domain) {
+    const container = d3.select(containerSelector);
+    container.selectAll("*").remove();
+
+    const SWATCH_SIZE = 22;   // measured from level2.png
+    const LABEL_GAP = 7;
+    const LABEL_WIDTH = 72;
+
+    const rampHeight = colors.length * SWATCH_SIZE;
+
+    const svg = container
+      .append("svg")
+      .attr("width", SWATCH_SIZE + LABEL_GAP + LABEL_WIDTH)
+      .attr("height", rampHeight + 12);
+
+    // Inset vertically so the endpoint labels are not clipped.
+    const plot = svg.append("g").attr("transform", "translate(0,6)");
+
+    plot
+      .selectAll("rect")
+      .data(colors)
+      .join("rect")
+      .attr("x", 0)
+      .attr("y", (color, index) => index * SWATCH_SIZE)
+      .attr("width", SWATCH_SIZE)
+      .attr("height", SWATCH_SIZE)
+      .attr("fill", (color) => color);
+
+    // Labels sit on the outer edges of the ramp: the top of the first swatch
+    // and the bottom of the last.
+    const endpoints = [
+      { value: domain[0], y: 0 },
+      { value: domain[1], y: rampHeight },
+    ];
+
+    plot
+      .selectAll("text")
+      .data(endpoints)
+      .join("text")
+      .attr("x", SWATCH_SIZE + LABEL_GAP)
+      .attr("y", (endpoint) => endpoint.y)
+      .attr("dominant-baseline", "middle")
+      .text((endpoint) => `${endpoint.value} Celsius`);
   }
 
-  return { render, renderLineKey };
+  return { render, renderVertical };
 })();

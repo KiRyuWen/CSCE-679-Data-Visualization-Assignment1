@@ -7,8 +7,8 @@
   --axis: #4169e1;          /* the sample screenshot uses blue axis labels */
   --surface: #ffffff;
   --border: #d9dce3;
-  --line-max: #c0392b;      /* level 2: max temperature line */
-  --line-min: #2b6cb0;      /* level 2: min temperature line */
+  --line-max: #31a354;      /* level 2: max temperature line (from level2.png) */
+  --line-min: #9ecae1;      /* level 2: min temperature line (from level2.png) */
 }
 
 * { box-sizing: border-box; }
@@ -62,6 +62,12 @@ body {
   font-size: 12px;
 }
 .metric-toggle label { cursor: pointer; }
+
+.chart-with-legend {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
 
 /* --- Chart ------------------------------------------------------------- */
 

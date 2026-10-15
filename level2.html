@@ -15,13 +15,11 @@
     </nav>
   </header>
 
-  <div class="controls">
-    <!-- Level 2 draws both series at once, so the legend explains the two lines
-         as well as the cell background colors. -->
+  <!-- Chart and legend sit side by side, as in level2.png. -->
+  <main class="chart-with-legend">
+    <div id="chart" class="chart"></div>
     <div id="legend" class="legend"></div>
-  </div>
-
-  <main id="chart" class="chart"></main>
+  </main>
 
   <div id="tooltip" class="tooltip" role="tooltip" aria-hidden="true"></div>
 

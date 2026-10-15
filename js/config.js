@@ -18,6 +18,16 @@ const CONFIG = {
     level2: { width: 97, height: 72, paddingX: 20, paddingY: 15 },
   },
 
+  // The level 2 legend shows the full eleven-class Spectral ramp over
+  // 0-40C, coolest first, even though only the warm six ever appear in the
+  // cells. Matches level2.png.
+  legendClasses: d3.schemeSpectral[11].slice().reverse(),
+
+  // Every level 2 mini line chart uses this fixed temperature domain rather
+  // than fitting to its own month, so the cells are directly comparable.
+  // It matches the 0-40 Celsius axis on the legend in level2.png.
+  dailyTemperatureDomain: [0, 40],
+
   // Level 2 only looks at the most recent N years (the spec says 5–10).
   level2YearCount: 10,
 

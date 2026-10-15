@@ -24,7 +24,13 @@
         .attr("height", scales.height)
         .attr("fill", colorScale(record.max));
 
-      // STEP 3 will add: MiniLineChart.render(group, record, scales);
+      MiniLineChart.render(group, record, scales);
     },
   });
+
+  Legend.renderVertical(
+    "#legend",
+    CONFIG.legendClasses,
+    CONFIG.dailyTemperatureDomain
+  );
 })();
