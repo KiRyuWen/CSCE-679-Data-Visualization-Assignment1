@@ -12,8 +12,10 @@ const CONFIG = {
 
   // Cell geometry. Level 2 needs bigger cells to fit a readable line chart.
   cell: {
-    level1: { width: 41, height: 37, padding: 7 },
-    level2: { width: 97, height: 72, padding: 3 },
+    // width/height are the cell PITCH (cell + gap); paddingX/paddingY are the
+    // gaps in pixels, measured from the reference images.
+    level1: { width: 41, height: 37, paddingX: 7, paddingY: 7 },
+    level2: { width: 97, height: 72, paddingX: 20, paddingY: 15 },
   },
 
   // Level 2 only looks at the most recent N years (the spec says 5–10).

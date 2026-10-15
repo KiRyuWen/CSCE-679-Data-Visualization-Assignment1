@@ -23,26 +23,9 @@
    * Whichever you choose, say so in a comment — readability is 30% of the grade.
    */
   function buildColorScale() {
-    // DESIGN CHOICE: six discrete classes, refit to the metric currently
-    // shown. The reference image is quantized, not a continuous ramp -- it
-    // uses exactly six Spectral swatches.
-    //
-    // The domain runs to (data maximum + 2) rather than the maximum itself.
-    // For the max metric that puts the six class breaks at 21.5 / 25 / 28.5 /
-    // 32 / 35.5, which reproduces level1.png cell for cell. Using the bare
-    // extent shifts 40% of the cells into a neighbouring class.
-    //
-    // Trade-off: refitting per metric means the Max and Min views are not
-    // directly comparable to each other, but each uses the full palette.
-    const [coolest, hottest] = d3.extent(monthly, (record) => record[metric]);
-
-    const colorScale = d3
-      .scaleQuantize()
-      .domain([coolest, hottest + 2])
-      .range(CONFIG.colorClasses);
-
-    return colorScale;
+    return ColorScale.forMetric(monthly, metric);
   }
+
 
   /** Redraw everything for the current metric. */
   function render() {

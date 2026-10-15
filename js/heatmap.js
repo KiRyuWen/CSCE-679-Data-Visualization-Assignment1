@@ -24,7 +24,7 @@ const Heatmap = (function () {
    *   xScale = d3.scaleBand()
    *     .domain(DataService.listYears(records))
    *     .range([0, years.length * cell.width])
-   *     .padding(cell.padding / cell.width);   // gap between cells
+   *     .padding(cell.paddingX / cell.width);   // gap between cells
    *   yScale = same idea with d3.range(1, 13) as the domain.
    * scaleBand gives you xScale(year) for position and xScale.bandwidth() for
    * size — never compute i * width by hand.
@@ -76,12 +76,17 @@ const Heatmap = (function () {
     const xScale = d3.scaleBand()
       .domain(years)
       .range([0, innerWidth])
-      .padding(cell.padding / cell.width);
+      // paddingOuter is half of paddingInner, so each edge gets half a gap
+      // and the step stays exactly cell.width. Plain .padding() would set
+      // both to the same value and shrink every cell.
+      .paddingInner(cell.paddingX / cell.width)
+      .paddingOuter(cell.paddingX / cell.width / 2);
 
     const yScale = d3.scaleBand()
       .domain(months)
       .range([0, innerHeight])
-      .padding(cell.padding / cell.height);
+      .paddingInner(cell.paddingY / cell.height)
+      .paddingOuter(cell.paddingY / cell.height / 2);
 
     const xAxis = d3.axisTop(xScale).tickFormat(d3.format("d"));
     const yAxis = d3.axisLeft(yScale).tickFormat((month) => CONFIG.monthNames[month - 1]);
