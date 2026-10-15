@@ -133,10 +133,10 @@ const Heatmap = (function () {
    * like v5. This is the single most common thing to get wrong when copying
    * older tutorials.
    */
-    function attachTooltip(selection) {
+    function attachTooltip(selection, separator) {
     selection
       .on("mouseover", (event, record) => {
-        Tooltip.show(event, Tooltip.formatMonthly(record));
+        Tooltip.show(event, Tooltip.formatMonthly(record, separator));
       })
       .on("mousemove", (event) => {
         Tooltip.move(event);

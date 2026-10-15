@@ -47,9 +47,20 @@ const Tooltip = (function () {
    *
    * HINT: d3.format("02d") or String(month).padStart(2, "0") for the month.
    */
-  function formatMonthly(record) {
+  /**
+   * @param {Object} record     a monthly record
+   * @param {string} separator  punctuation after the date; level1.png uses
+   *        ";" and level2.png uses ",", so it is a parameter rather than two
+   *        near-identical functions.
+   *
+   * NOTE: `min` is the month's lowest daily minimum, on both levels. The
+   * level 2 reference image instead shows the HIGHEST daily minimum there
+   * (28 rather than 19 for 2012-04), which contradicts the label and its own
+   * level 1 tooltip, so it is not reproduced.
+   */
+  function formatMonthly(record, separator = ";") {
     const paddedMonth = String(record.month).padStart(2, "0");
-    return `Date: ${record.year}-${paddedMonth}; max: ${record.max} min: ${record.min}`;
+    return `Date: ${record.year}-${paddedMonth}${separator} max: ${record.max} min: ${record.min}`;
   }
 
   return { show, move, hide, formatMonthly };

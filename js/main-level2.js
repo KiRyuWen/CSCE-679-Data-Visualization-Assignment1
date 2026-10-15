@@ -28,6 +28,9 @@
     },
   });
 
+  // Hovering anywhere in the cell works, not just over the background rect.
+  Heatmap.attachTooltip(d3.selectAll(".cell-group"), ",");
+
   Legend.renderVertical(
     "#legend",
     CONFIG.legendClasses,
